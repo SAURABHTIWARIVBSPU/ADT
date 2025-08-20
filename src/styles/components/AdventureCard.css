@@ -1,0 +1,217 @@
+/* ========= Adventure Card (animated, premium UI) ========= */
+
+/* Base palette (fallbacks for dark/light) */
+:root {
+  --ac-stroke: rgba(255,255,255,0.12);
+  --ac-bg: rgba(255,255,255,0.04);
+  --ac-text: #e7eefc;
+  --ac-muted: #b6c2e2;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --ac-stroke: rgba(0,0,0,0.08);
+    --ac-bg: rgba(0,0,0,0.02);
+    --ac-text: #0b1220;
+    --ac-muted: #4b5563;
+  }
+}
+
+/* Card wrapper (Link) */
+.adventure-card-link {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--ac-stroke);
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, var(--ac-bg), transparent 120%);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.26);
+  transform: translateY(0) scale(1);
+  transition:
+    transform .28s cubic-bezier(.2,.7,.2,1),
+    box-shadow .28s ease,
+    border-color .28s ease,
+    background .28s ease;
+  opacity: 0;
+  animation: ac-card-in .55s cubic-bezier(.2,.7,.2,1) .04s forwards;
+}
+
+/* Subtle glowing border on hover */
+.adventure-card-link::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(from 180deg, #7c3aed, #2563eb, #06b6d4, #7c3aed);
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity .28s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.adventure-card-link:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 56px rgba(0,0,0,0.38);
+  border-color: rgba(124,58,237,0.45);
+}
+.adventure-card-link:hover::before { opacity: .35; }
+
+/* Image area */
+.adventure-card-image-container {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+  background: #0b1220;
+}
+.adventure-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+  transition: transform .5s ease;
+}
+.adventure-card-image-container::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.45) 100%);
+  opacity:.6; pointer-events:none;
+  transition: opacity .3s ease;
+}
+.adventure-card-link:hover .adventure-card-image { transform: scale(1.08) rotate(.2deg); }
+.adventure-card-link:hover .adventure-card-image-container::after{ opacity:.75; }
+
+/* Continent badge */
+.adventure-card-continent {
+  position: absolute; left: 12px; top: 12px;
+  padding: 6px 10px;
+  font-size: 12px; font-weight: 700;
+  color: var(--ac-text);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid var(--ac-stroke);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  transform: translateY(-8px);
+  opacity: 0;
+  animation: ac-badge-in .5s ease .12s forwards;
+}
+
+/* Wishlist button + feedback */
+.adventure-card-wishlist {
+  position: absolute; right: 10px; top: 10px;
+  display: grid; gap: 6px; justify-items: end;
+}
+.wishlist-btn {
+  display: grid; place-items: center;
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid var(--ac-stroke);
+  backdrop-filter: blur(6px);
+  transition: transform .18s ease, background .2s ease, box-shadow .2s ease;
+}
+.wishlist-btn:hover { transform: scale(1.07); background: rgba(255,255,255,0.18); }
+.wishlist-btn:active { transform: scale(0.94); }
+
+.wishlist-added-msg{
+  font-size: 11px; font-weight: 700;
+  padding: 4px 8px;
+  color: #16a34a;
+  background: rgba(22,163,74,0.1);
+  border: 1px solid rgba(22,163,74,0.35);
+  border-radius: 8px;
+  animation: ac-pop .6s cubic-bezier(.16,1,.3,1);
+}
+
+/* Details */
+.adventure-card-details{
+  padding: 14px 14px 16px;
+  display: grid; gap: 8px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.0));
+}
+
+.adventure-card-title{
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: .2px;
+}
+
+.adventure-card-location{
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ac-muted);
+  font-size: 14px;
+}
+
+.adventure-card-meta{
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ac-muted);
+  font-size: 13px; font-weight: 600;
+}
+.adventure-card-meta svg{ opacity:.9; }
+
+.adventure-card-price{
+  margin-top: 2px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  background: linear-gradient(90deg, #7c3aed, #2563eb);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+.adventure-card-rating-type{
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font-weight: 700;
+}
+.adventure-card-rating-type svg { transform: translateY(-1px); }
+
+.adventure-card-top-rated{
+  margin-left: 4px;
+  padding: 4px 8px;
+  font-size: 11px; font-weight: 900; letter-spacing: .3px;
+  color: #fde68a;
+  background: rgba(250,204,21,0.08);
+  border: 1px solid rgba(250,204,21,0.35);
+  border-radius: 999px;
+  animation: ac-bounce .7s ease-out .1s both;
+}
+
+/* Focus ring (keyboard nav) */
+.adventure-card-link:focus-visible{
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.35), 0 0 0 6px rgba(37,99,235,0.25);
+}
+
+/* Animations */
+@keyframes ac-card-in{
+  from{ opacity:0; transform: translateY(14px) scale(.985); }
+  to  { opacity:1; transform: translateY(0)    scale(1); }
+}
+@keyframes ac-badge-in{
+  from{ opacity:0; transform: translateY(-10px); }
+  to  { opacity:1; transform: translateY(0); }
+}
+@keyframes ac-pop{
+  0%{ transform: translateY(6px) scale(.96); opacity:0; }
+  60%{ transform: translateY(0) scale(1.03); opacity:1; }
+  100%{ transform: translateY(0) scale(1); opacity:1; }
+}
+@keyframes ac-bounce{
+  0%  { transform: translateY(6px) scale(.96); }
+  60% { transform: translateY(-2px) scale(1.02); }
+  100%{ transform: translateY(0) scale(1); }
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce){
+  .adventure-card-link,
+  .adventure-card-continent,
+  .adventure-card-top-rated,
+  .wishlist-added-msg { animation: none !important; }
+  .adventure-card-link,
+  .wishlist-btn,
+  .adventure-card-image { transition: none !important; }
+}

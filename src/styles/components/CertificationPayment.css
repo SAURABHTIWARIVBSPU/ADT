@@ -1,0 +1,195 @@
+/* ---------- Base tokens (auto dark via prefers-color-scheme) ---------- */
+:root {
+  --bg: #f7f8fb;
+  --text: #0f172a;
+  --muted: #5b6677;
+  --border: rgba(2,6,23,0.12);
+  --ring: rgba(37,99,235,0.45);
+  --card: rgba(255,255,255,0.9);
+  --shadow: 0 24px 60px rgba(2, 6, 23, 0.12);
+
+  /* Sun (day) gradient set */
+  --sun-1: radial-gradient(1100px 600px at -10% -10%, rgba(255,200,92,0.35), transparent 55%);
+  --sun-2: radial-gradient(900px 520px at 110% -10%, rgba(255,115,80,0.20), transparent 60%);
+  --sun-3: conic-gradient(from 200deg at 60% 50%, rgba(255,182,90,0.18), transparent 30%, rgba(255,147,115,0.15), transparent 70%);
+
+  /* Evening gradient set */
+  --eve-1: radial-gradient(1100px 600px at -10% -10%, rgba(93,95,239,0.35), transparent 55%);
+  --eve-2: radial-gradient(900px 520px at 110% -10%, rgba(32,211,169,0.22), transparent 60%);
+  --eve-3: conic-gradient(from 200deg at 60% 50%, rgba(99,102,241,0.18), transparent 30%, rgba(56,189,248,0.16), transparent 70%);
+
+  --accent: #2563eb;
+  --accent-2: #22c55e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1020;
+    --text: #e6eaf1;
+    --muted: #a1abb9;
+    --border: rgba(148,163,184,0.18);
+    --ring: rgba(99,102,241,0.55);
+    --card: rgba(16, 23, 42, 0.60);
+    --shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+
+    /* Darkened variants keep mood consistent */
+    --sun-1: radial-gradient(1100px 600px at -10% -10%, rgba(255,200,92,0.30), transparent 55%);
+    --sun-2: radial-gradient(900px 520px at 110% -10%, rgba(255,115,80,0.18), transparent 60%);
+    --sun-3: conic-gradient(from 200deg at 60% 50%, rgba(255,182,90,0.20), transparent 30%, rgba(255,147,115,0.16), transparent 70%);
+
+    --eve-1: radial-gradient(1100px 600px at -10% -10%, rgba(93,95,239,0.40), transparent 55%);
+    --eve-2: radial-gradient(900px 520px at 110% -10%, rgba(32,211,169,0.22), transparent 60%);
+    --eve-3: conic-gradient(from 200deg at 60% 50%, rgba(99,102,241,0.22), transparent 30%, rgba(56,189,248,0.18), transparent 70%);
+  }
+}
+
+/* ---------- Page shell & animated background ---------- */
+.cp-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--bg);
+  overflow-x: hidden;
+  position: relative;
+}
+
+.cp-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--sun-1), var(--sun-2), var(--sun-3);
+  animation: cp-drift 14s ease-in-out infinite;
+  filter: saturate(115%);
+}
+
+/* swap to evening palette when .cp-evening on page */
+.cp-evening .cp-bg { background: var(--eve-1), var(--eve-2), var(--eve-3); }
+
+@keyframes cp-drift {
+  0%   { transform: translate3d(0,0,0) rotate(0deg); }
+  50%  { transform: translate3d(0,-12px,0) rotate(1.5deg); }
+  100% { transform: translate3d(0,0,0) rotate(0deg); }
+}
+
+/* floating orbs */
+.cp-orb {
+  position: fixed;
+  z-index: 0;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  filter: blur(42px) saturate(140%);
+  opacity: 0.18;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: cp-drift 16s ease-in-out infinite;
+}
+.cp-orb--a { top: -120px; left: -140px; background: radial-gradient(circle at 30% 30%, rgba(255,215,150,0.8), rgba(255,128,98,0.45), transparent 60%); }
+.cp-orb--b { bottom: -160px; right: -120px; background: radial-gradient(circle at 65% 65%, rgba(93,95,239,0.70), rgba(56,189,248,0.45), transparent 60%); animation-delay: 2.2s; }
+
+/* evening accent tweak */
+.cp-evening .cp-orb--a { background: radial-gradient(circle at 30% 30%, rgba(93,95,239,0.75), rgba(32,211,169,0.5), transparent 60%); }
+.cp-evening .cp-orb--b { background: radial-gradient(circle at 65% 65%, rgba(34,197,94,0.7), rgba(99,102,241,0.45), transparent 60%); }
+
+/* ---------- Card ---------- */
+.cp-card {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  width: min(820px, 94vw);
+  padding: 1.5rem;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  backdrop-filter: saturate(130%) blur(10px);
+  -webkit-backdrop-filter: saturate(130%) blur(10px);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.cp-card:hover { transform: translateY(-3px); box-shadow: 0 16px 54px rgba(2,6,23,0.20); border-color: rgba(37,99,235,0.25); }
+
+/* rotating conic glow ring */
+.cp-glow-ring {
+  pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  padding: 1px;
+  background: conic-gradient(from 0deg, rgba(37,99,235,0.00), rgba(37,99,235,0.25), rgba(34,197,94,0.18), rgba(56,189,248,0.20), rgba(37,99,235,0.00));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: cp-spin 14s linear infinite;
+  opacity: 0.55;
+}
+@keyframes cp-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Typographic hierarchy ---------- */
+.cp-title { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.01em; }
+
+.cp-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1.25rem;
+}
+@media (max-width: 640px) {
+  .cp-grid { grid-template-columns: 1fr; }
+}
+
+.cp-kv { background: rgba(255,255,255,0.55); border: 1px solid var(--border); border-radius: 14px; padding: 12px; }
+@media (prefers-color-scheme: dark) {
+  .cp-kv { background: rgba(2,6,23,0.35); }
+}
+.cp-k { font-size: 0.8rem; color: var(--muted); }
+.cp-v { font-size: 1rem; font-weight: 600; color: var(--text); }
+
+.cp-divider { grid-column: 1 / -1; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent); margin: 8px 0; }
+@media (prefers-color-scheme: dark) {
+  .cp-divider { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent); }
+}
+
+.cp-note { grid-column: 1 / -1; background: rgba(255,255,255,0.55); border: 1px dashed var(--border); border-radius: 14px; padding: 12px; }
+.cp-note-h { font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+.cp-note-b { font-size: 0.95rem; color: var(--text); }
+@media (prefers-color-scheme: dark) {
+  .cp-note { background: rgba(2,6,23,0.35); }
+}
+
+/* ---------- CTA ---------- */
+.cp-pay-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 46px;
+  margin-top: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: linear-gradient(135deg, var(--accent), #7c3aed);
+  box-shadow: 0 14px 36px rgba(37,99,235,0.30);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+}
+.cp-pay-btn:hover { filter: brightness(1.05); box-shadow: 0 16px 44px rgba(37,99,235,0.36); }
+.cp-pay-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--ring); }
+
+/* helper copy */
+.cp-hint { margin-top: 10px; font-size: 0.85rem; color: var(--muted); }
+
+/* ---------- Reduce motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cp-bg, .cp-orb, .cp-glow-ring, .cp-card, .cp-pay-btn { animation: none !important; transition: none !important; transform: none !important; }
+}
+
+/* ---------- (Keep original simple styles for safety/fallback) ---------- */
+/* legacy selectors preserved so older markup still looks okay */
+.certification-payment-container { max-width: 500px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+.certification-payment-title { font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem; color: #1a237e; text-align: center; }
+.certification-payment-details { margin-bottom: 1.5rem; font-size: 1.1rem; color: #333; }
+.certification-payment-details div { margin-bottom: 0.5rem; }
+.certification-payment-btn { display: block; width: 100%; padding: 0.75rem 0; background: #1976d2; color: #fff; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: 500; cursor: pointer; transition: background 0.2s; margin-top: 1rem; }
+.certification-payment-btn:hover { background: #1565c0; }

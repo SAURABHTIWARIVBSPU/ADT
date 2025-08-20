@@ -1,0 +1,215 @@
+/* ==========================================================
+  CertificationGrid.css (FORM-style tint + no page scroll)
+  Goal:
+  1) Entire background = same soft "card" tint as form
+  2) No page scrollbar (outer page), only internal where needed
+  3) Cards: clean glass, gentle lift, same vibe as form
+  *Class names kept same as CertificationGrid.jsx
+========================================================== */
+
+/* ---- Tokens aligned to FORM look (colors SAME as form) ---- */
+:root {
+  /* Base inks */
+  --at-ink: #0f172a;
+  --at-ink-dim: #5b6677;
+
+  /* FORM-like card color & borders */
+  --at-card: rgba(255,255,255,0.9);           /* light "form card" tint */
+  --at-border: rgba(2,6,23,0.12);
+  --at-shadow: 0 24px 60px rgba(2, 6, 23, 0.12);
+
+  /* Focus ring similar to form */
+  --at-ring: rgba(37,99,235,0.45);
+
+  /* Sizing */
+  --at-radius-xl: 18px;
+  --at-radius-lg: 14px;
+  --at-radius-md: 12px;
+
+  --at-maxw: 1240px;
+  --at-grid-gap: clamp(14px, 2.4vw, 24px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --at-ink: #e6eaf1;
+    --at-ink-dim: #a1abb9;
+
+    /* Dark side matches form style */
+    --at-card: rgba(16,23,42,0.65);
+    --at-border: rgba(148,163,184,0.18);
+    --at-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+
+    --at-ring: rgba(99,102,241,0.55);
+  }
+}
+
+/* -------- PAGE WRAPPER (background = card tint, no page scroll) -------- */
+.at-theme {
+  position: relative;
+  min-height: 100dvh;
+  color: var(--at-ink);
+  background: var(--at-card);     /* BACKGROUND = CARD color */
+  overflow: hidden;               /* remove page scrollbar */
+}
+
+/* Remove old heavy animated bg; keep a soft, non-overflow tint */
+.at-bg-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Bring subtle depth using the same card tint (no overflow risk) */
+  background:
+    linear-gradient(180deg,
+      color-mix(in oklab, var(--at-card) 70%, transparent) 0%,
+      color-mix(in oklab, var(--at-card) 40%, transparent) 50%,
+      color-mix(in oklab, var(--at-card) 20%, transparent) 100%);
+  filter: saturate(112%);
+}
+
+/* -------- LAYOUT CONTAINERS -------- */
+.certification-grid-container {
+  width: min(100%, calc(var(--at-maxw) + 48px));
+  margin-inline: auto;
+  padding: clamp(16px, 2.5vw, 24px);
+  padding-top: clamp(18px, 3.5vw, 32px);
+  display: grid;
+  row-gap: 10px;
+}
+
+/* Topbar = glassy panel on same tint */
+.at-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: color-mix(in oklab, var(--at-card) 86%, transparent 14%);
+  backdrop-filter: blur(8px) saturate(130%);
+  border: 1px solid var(--at-border);
+  border-radius: var(--at-radius-xl);
+  box-shadow: var(--at-shadow);
+  padding: 14px 16px;
+}
+
+.certification-grid-title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--at-ink);
+}
+
+.at-sub {
+  margin-top: 6px;
+  margin-bottom: 4px;
+  font-size: clamp(12.5px, 1.2vw, 15px);
+  color: var(--at-ink-dim);
+  opacity: 0.95;
+}
+
+/* -------- SEARCH BAR (same ring + glass) -------- */
+.at-search-wrap {
+  margin-top: 10px;
+  background: color-mix(in oklab, var(--at-card) 86%, transparent 14%);
+  border: 1px solid var(--at-border);
+  border-radius: var(--at-radius-lg);
+  padding: 12px;
+  box-shadow: var(--at-shadow);
+  backdrop-filter: blur(8px) saturate(130%);
+}
+
+.at-search-wrap input[type="text"],
+.at-search-wrap input[type="search"] {
+  border-radius: 12px !important;
+  border: 1px solid transparent !important;
+  outline: none;
+  padding: 10px 12px;
+  width: 100%;
+  background: rgba(255,255,255,0.92);
+  color: #101216;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.04);
+}
+@media (prefers-color-scheme: dark) {
+  .at-search-wrap input[type="text"],
+  .at-search-wrap input[type="search"] {
+    background: rgba(2,6,23,0.35);
+    color: var(--at-ink);
+  }
+}
+.at-search-wrap input[type="text"]:focus,
+.at-search-wrap input[type="search"]:focus {
+  border-color: var(--at-ring) !important;
+  box-shadow: 0 0 0 3px var(--at-ring);
+}
+
+/* -------- RESPONSIVE GRID -------- */
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--at-grid-gap);
+  margin-top: 16px;
+}
+@media (max-width: 520px) {
+  .certification-grid { grid-template-columns: repeat(2, 1fr); }
+  .at-card-wrap { grid-column: span 2; }
+}
+@media (min-width: 521px) and (max-width: 899px) {
+  .certification-grid { grid-template-columns: repeat(6, 1fr); }
+  .at-card-wrap { grid-column: span 3; }
+}
+@media (min-width: 900px) {
+  .certification-grid { grid-template-columns: repeat(12, 1fr); }
+  .at-card-wrap { grid-column: span 3; }
+}
+
+/* -------- CARDS (polished glass; same colour family) -------- */
+.at-card-wrap {
+  position: relative;
+  border-radius: var(--at-radius-lg);
+  background: color-mix(in oklab, var(--at-card) 86%, transparent 14%);
+  border: 1px solid var(--at-border);
+  box-shadow: var(--at-shadow);
+  backdrop-filter: blur(6px) saturate(125%);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+  overflow: clip;
+}
+.at-card-wrap:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 54px rgba(2,6,23,0.20);
+  filter: brightness(1.02);
+}
+
+/* Optional: inner padding helper if your JSX card root lacks padding */
+.at-card-wrap .at-card-inner {
+  padding: clamp(12px, 1.6vw, 16px);
+}
+
+/* -------- EMPTY STATE -------- */
+.at-empty {
+  margin: 28px auto 36px;
+  padding: 18px 20px;
+  width: min(680px, 100%);
+  text-align: center;
+  border-radius: var(--at-radius-md);
+  background: color-mix(in oklab, var(--at-card) 90%, transparent 10%);
+  border: 1px dashed var(--at-border);
+  color: var(--at-ink-dim);
+  box-shadow: var(--at-shadow);
+}
+
+/* -------- DARK MODE -------- */
+:root.dark .at-theme,
+.at-theme.dark { color: var(--at-ink); }
+
+/* topbar/search/cards already pull from --at-card/--at-border */
+:root.dark .at-topbar,
+.at-theme.dark .at-topbar { border-color: var(--at-border); }
+:root.dark .at-search-wrap,
+.at-theme.dark .at-search-wrap { border-color: var(--at-border); }
+:root.dark .at-card-wrap,
+.at-theme.dark .at-card-wrap { border-color: var(--at-border); }
+
+/* -------- Nice touches -------- */
+.certification-grid-container ::selection {
+  background: color-mix(in oklab, rgba(34,197,94,0.65) 60%, rgba(37,99,235,0.45) 40%);
+  color: #0c0e11;
+}

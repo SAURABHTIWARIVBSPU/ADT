@@ -1,0 +1,144 @@
+/* AdventureSlider.css */
+.adventure-slider {
+  margin: 2rem auto;
+  max-width: 1200px;
+  background: linear-gradient(120deg, #f9fafb 60%, #e0e7ff 100%);
+  border-radius: 16px;
+  box-shadow: 0 6px 32px rgba(79,70,229,0.13);
+  padding: 2rem 1.5rem;
+  border: 2px solid #a5b4fc;
+  position: relative;
+  overflow: hidden;
+}
+
+.adventure-slider.featured {
+  border: 2.5px solid #6366f1;
+  box-shadow: 0 10px 40px rgba(99,102,241,0.18);
+}
+
+.adventure-slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.adventure-slider-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3730a3;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.adventure-slider-title.featured {
+  color: #fff;
+  background: linear-gradient(90deg, #6366f1 60%, #818cf8 100%);
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.13);
+}
+
+.adventure-slider-viewall {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.adventure-slider-viewall:hover {
+  color: #3730a3;
+  transform: translateX(3px);
+}
+
+.adventure-slider-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.adventure-slider-btn {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #4f46e5;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+.adventure-slider-btn:hover {
+  background: #6366f1;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+}
+
+.adventure-slider-scroll {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 0.5rem;
+  flex: 1;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.adventure-slider-scroll::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .adventure-slider {
+    padding: 1.5rem 1rem;
+    margin: 1.5rem auto;
+  }
+  
+  .adventure-slider-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .adventure-slider-title {
+    font-size: 1.3rem;
+  }
+  
+  .adventure-slider-controls {
+    gap: 0.5rem;
+  }
+  
+  .adventure-slider-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .adventure-slider {
+    border-radius: 12px;
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .adventure-slider-scroll {
+    gap: 1rem;
+  }
+}

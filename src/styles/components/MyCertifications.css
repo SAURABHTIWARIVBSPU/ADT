@@ -1,0 +1,191 @@
+/* ================= MyCertifications.css =================
+   Professional, clean UI; same functionality.
+   Palette follows your lime/sky/emerald neutrals.
+   - Animated but subtle page gradient
+   - Compact, readable cards with gentle hover
+   - Accessible contrast; dark mode aware
+========================================================== */
+
+/* Tailwind-friendly tokens */
+:root {
+  --mc-ink: #0f172a;               /* slate-900-ish */
+  --mc-ink-dim: #64748b;           /* slate-500 */
+  --mc-ring: rgba(37,99,235,0.5);  /* blue ring */
+
+  /* brand tints from your palette */
+  --mc-lime: #a3e635;    /* lime-400 */
+  --mc-sky: #bae6fd;     /* sky-200 */
+  --mc-emerald: #a7f3d0; /* emerald-200 */
+  --mc-gray: #f3f4f6;    /* gray-100 */
+
+  --mc-card: rgba(255,255,255,0.94);
+  --mc-border: rgba(2,6,23,0.10);
+  --mc-shadow: 0 18px 44px rgba(2,6,23,0.10);
+  --mc-radius-xl: 20px;
+  --mc-radius-lg: 16px;
+  --mc-radius-md: 12px;
+
+  --mc-maxw: 1120px;
+  --mc-gap: clamp(12px, 2.2vw, 20px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --mc-ink: #713f3f;
+    --mc-ink-dim: #030305;
+    --mc-card: rgb(229, 224, 224);
+    --mc-border: rgba(148,163,184,0.18);
+    --mc-shadow: 0 28px 64px rgb(202, 211, 255);
+  }
+}
+
+/* Page shell */
+.mc-page {
+  position: relative;
+  background: var(--mc-gray);
+  color: var(--mc-ink);
+  overflow-x: clip;
+}
+
+/* Soft animated gradient background */
+.mc-bg {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 12% 10%, color-mix(in oklab, var(--mc-sky) 42%, transparent) 0%, transparent 60%),
+    radial-gradient(900px 600px at 85% 8%, color-mix(in oklab, var(--mc-emerald) 40%, transparent) 0%, transparent 62%),
+    radial-gradient(1000px 700px at 50% 100%, color-mix(in oklab, var(--mc-lime) 28%, transparent) 0%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #f8faff 60%, #ffffff 100%);
+  filter: saturate(108%);
+  animation: mc-swell 16s ease-in-out infinite alternate;
+}
+@keyframes mc-swell {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-1.2%) scale(1.01); }
+}
+@media (prefers-reduced-motion: reduce) { .mc-bg { animation: none; } }
+
+/* Container */
+.mc-container {
+  width: min(100%, calc(var(--mc-maxw) + 32px));
+}
+
+/* Header row */
+.mc-header {
+  display: flex; align-items: center; gap: 10px;
+}
+.mc-title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800; letter-spacing: -0.01em;
+}
+.mc-count {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 34px; height: 28px; padding: 0 10px;
+  border-radius: 999px; font-weight: 800; font-size: 12.5px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--mc-border);
+  box-shadow: 0 10px 26px rgba(2,6,23,0.08);
+}
+
+/* Empty state */
+.mc-empty {
+  margin-top: 24px;
+  border: 1px dashed var(--mc-border);
+  border-radius: var(--mc-radius-lg);
+  background: color-mix(in oklab, var(--mc-card) 86%, transparent 14%);
+  padding: 22px 18px;
+  text-align: center;
+  box-shadow: var(--mc-shadow);
+  position: relative;
+  overflow: hidden;
+}
+.mc-empty h3 { font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; }
+.mc-muted { color: var(--mc-ink-dim); }
+.mc-empty-blob {
+  position: absolute; inset: -20%;
+  background:
+    radial-gradient(50% 50% at 20% 20%, color-mix(in oklab, var(--mc-sky) 35%, transparent) 0%, transparent 60%),
+    radial-gradient(40% 40% at 80% 80%, color-mix(in oklab, var(--mc-emerald) 35%, transparent) 0%, transparent 60%);
+  filter: blur(22px) saturate(120%);
+  opacity: 0.55; z-index: -1;
+}
+
+/* Grid */
+.mc-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--mc-gap);
+}
+@media (max-width: 640px) {
+  .mc-grid > .mc-card { grid-column: span 12; }
+}
+@media (min-width: 641px) and (max-width: 1023px) {
+  .mc-grid > .mc-card { grid-column: span 6; }
+}
+@media (min-width: 1024px) {
+  .mc-grid > .mc-card { grid-column: span 4; }
+}
+
+/* Card */
+.mc-card {
+  border-radius: var(--mc-radius-xl);
+  border: 1px solid var(--mc-border);
+  background: var(--mc-card);
+  box-shadow: var(--mc-shadow);
+  backdrop-filter: blur(8px) saturate(130%);
+  -webkit-backdrop-filter: blur(8px) saturate(130%);
+  padding: clamp(14px, 2vw, 18px);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.mc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 48px rgba(2,6,23,0.16);
+  filter: brightness(1.02);
+}
+
+/* Card header */
+.mc-card-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-bottom: 10px;
+}
+.mc-card-title {
+  font-weight: 800; letter-spacing: -0.01em;
+  font-size: clamp(15px, 1.2vw, 16px);
+}
+
+/* Status pill */
+.mc-pill {
+  font-size: 12px; font-weight: 800; letter-spacing: .3px;
+  padding: 6px 10px; border-radius: 999px;
+  border: 1px solid var(--mc-border);
+  box-shadow: 0 10px 26px rgba(2,6,23,0.06);
+  background: rgba(255,255,255,0.9);
+  color: #065f46; /* emerald-800-ish */
+}
+.mc-pill--ok {
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--mc-emerald) 55%, #fff), #fff);
+}
+
+/* Key/Value block */
+.mc-kv { display: grid; gap: 8px; }
+.mc-kv-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding-top: 4px;
+  border-top: 1px dashed color-mix(in oklab, var(--mc-border) 60%, transparent);
+}
+.mc-kv-row:first-child { border-top: 0; padding-top: 0; }
+.mc-k {
+  font-size: 12.5px; font-weight: 700; color: var(--mc-ink-dim);
+}
+.mc-v {
+  font-size: 13.5px; font-weight: 800; color: var(--mc-ink);
+  text-align: right;
+}
+.mc-clip { max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Selection */
+.mc-container ::selection {
+  background: color-mix(in oklab, var(--mc-emerald) 55%, var(--mc-sky) 45%);
+  color: #0b0f16;
+}

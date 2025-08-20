@@ -1,0 +1,144 @@
+.my-bookings-container {
+  width: 100vw;
+  max-width: none;
+  margin: 0;
+  padding: 2vw 2vw;
+  background: linear-gradient(120deg, #f8fafc 60%, #e0e7ff 100%);
+  border-radius: 0;
+  box-shadow: none;
+  border: 2px solid #6366f1;
+  min-height: 100vh;
+}
+
+.my-bookings-container h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #3730a3;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  text-align: left;
+  text-shadow: 0 2px 8px rgba(99,102,241,0.08);
+}
+
+.my-booking-card {
+  border: 2px solid #6366f1;
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 32px;
+  background: #fff;
+  box-shadow: 0 6px 32px rgba(99,102,241,0.10);
+  transition: box-shadow 0.2s, transform 0.2s, border 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.my-booking-card:hover {
+  box-shadow: 0 12px 40px rgba(99,102,241,0.18);
+  transform: translateY(-4px) scale(1.015);
+  border: 2.5px solid #3730a3;
+}
+
+.my-booking-card b {
+  color: #3730a3;
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+
+.my-booking-adventure-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+
+.my-booking-adventure-img {
+  width: 110px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(99,102,241,0.13);
+  border: 2px solid #6366f1;
+}
+
+.my-booking-adventure-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 1.08rem;
+}
+
+.my-booking-details-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 36px;
+  margin-top: 8px;
+  font-size: 1.08rem;
+}
+
+.my-booking-details-list > div {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  color: #373737;
+  box-shadow: 0 1px 4px rgba(99,102,241,0.04);
+}
+
+.my-booking-details-list > div:first-child {
+  background: linear-gradient(90deg, #6366f1 60%, #a5b4fc 100%);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+}
+
+.my-booking-status-badge {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 12px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  background: #6366f1;
+  color: #fff;
+  margin-left: 8px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 4px rgba(99,102,241,0.10);
+}
+
+.my-bookings-empty {
+  padding: 32px;
+  text-align: center;
+  color: #888;
+  font-size: 1.2rem;
+  background: #fffbe9;
+  border-radius: 12px;
+  margin: 40px auto;
+  max-width: 400px;
+  box-shadow: 0 2px 12px rgba(255, 193, 7, 0.08);
+}
+
+@media (max-width: 600px) {
+  .my-bookings-container {
+    padding: 0.5rem 0.2rem;
+    border-radius: 0;
+  }
+  .my-booking-card {
+    padding: 14px 6px;
+    border-radius: 8px;
+  }
+  .my-booking-adventure-info {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .my-booking-adventure-img {
+    width: 100%;
+    height: 120px;
+  }
+  .my-booking-details-list {
+    flex-direction: column;
+    gap: 8px;
+  }
+} 
