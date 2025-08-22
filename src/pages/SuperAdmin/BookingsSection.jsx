@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllBookings } from '../../Data/admin-data';
+import { getAllBookings } from '../../data/mock/admin-data';
 
 export default function BookingsSection() {
   const [bookings, setBookings] = useState([]);

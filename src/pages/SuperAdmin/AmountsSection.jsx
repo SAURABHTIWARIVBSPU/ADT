@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getTotalBookingAmount, getTotalCertificationAmount, getTotalAmount } from '../../Data/admin-data';
+import { getTotalBookingAmount, getTotalCertificationAmount, getTotalAmount } from '../../data/mock/admin-data';
 
 export default function AmountsSection() {
   const [booking, setBooking] = useState(0);

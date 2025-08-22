@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { globalAdventureData } from "../../Data/data";
+import { globalAdventureData } from "../../data/mock/data";
 import { useUser, SignIn } from '@clerk/clerk-react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';

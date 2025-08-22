@@ -5,7 +5,7 @@ import { FilterProvider, useFilter } from '../../context/FilterContext';
 import { useLocation } from 'react-router-dom';
 import { SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
 import '../../styles/components/BookingPage.css';
-import { globalAdventureData } from "../../Data/data";
+import { globalAdventureData } from "../../data/mock/data";
 
 import AdventureCard from '../Booking/AdventureCard';
 import Header from '../../components/layout/Header';

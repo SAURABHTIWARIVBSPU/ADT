@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllPartners } from '../../Data/admin-data';
+import { getAllPartners } from '../../data/mock/admin-data';
 import PartnerCard from '../Partner/PartnerCard';
 import { FaCheck, FaTimes, FaEye } from 'react-icons/fa';
 

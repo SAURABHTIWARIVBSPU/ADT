@@ -1,5 +1,6 @@
-@import "tailwindcss";
-@import "./styles/enhanced.css";
+@import "./styles/globals.css";
+@import "./styles/components.css";
+@import "./styles/variables.css";
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
