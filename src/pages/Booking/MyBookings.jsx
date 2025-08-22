@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useUser } from '@clerk/clerk-react';
 import '../../styles/components/MyBookings.css';
 import { globalAdventureData } from '../../data/mock/data';
 import Header from '../../components/layout/Header';
@@ -6,11 +7,22 @@ import Footer from '../../components/layout/Footer';
 
 export default function MyBookings() {
   const [bookings, setBookings] = useState([]);
+  const { user } = useUser();
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('myBookings') || '[]');
-    setBookings(stored);
-  }, []);
+    async function fetchBookings() {
+      try {
+        const res = await fetch(`http://localhost:5000/api/bookings?userId=${user?.id}`);
+        if (!res.ok) throw new Error('Failed to load bookings');
+        const data = await res.json();
+        setBookings(data);
+      } catch (err) {
+        console.error(err);
+        setBookings([]);
+      }
+    }
+    if (user) fetchBookings();
+  }, [user]);
 
   if (!bookings.length) {
     return (

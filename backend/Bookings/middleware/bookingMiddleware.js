@@ -37,3 +37,25 @@ export async function saveBooking(req, res, next) {
     res.status(500).json({ message: 'Failed to save booking' });
   }
 }
+
+export async function getBookings(req, res) {
+  try {
+    let bookings = [];
+    try {
+      const data = await fs.readFile(DATA_PATH, 'utf-8');
+      bookings = JSON.parse(data);
+    } catch (err) {
+      if (err.code !== 'ENOENT') throw err;
+    }
+
+    const { userId } = req.query;
+    const filtered = userId
+      ? bookings.filter((b) => String(b.userId) === String(userId))
+      : bookings;
+
+    res.json(filtered);
+  } catch (err) {
+    console.error('Booking fetch error:', err);
+    res.status(500).json({ message: 'Failed to load bookings' });
+  }
+}
