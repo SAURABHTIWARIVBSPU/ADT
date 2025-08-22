@@ -52,6 +52,7 @@ export default function ReviewPayment() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(true);
   const [showStripe, setShowStripe] = useState(false);
+  const [apiError, setApiError] = useState(null);
 
   if (!adventure) {
     return <div className="no-adventure">No adventure selected</div>;
@@ -61,8 +62,7 @@ export default function ReviewPayment() {
     setShowStripe(true);
   };
 
-  const handlePaymentSuccess = () => {
-    // Save booking and close modal
+  const handlePaymentSuccess = async () => {
     const booking = {
       userId: user?.id,
       adventureId: adventure?.id,
@@ -72,11 +72,22 @@ export default function ReviewPayment() {
       certification,
       status: 'confirmed',
     };
-    const bookings = JSON.parse(localStorage.getItem('myBookings') || '[]');
-    bookings.push(booking);
-    localStorage.setItem('myBookings', JSON.stringify(bookings));
-    setShowModal(false);
-    setTimeout(() => navigate('/my-bookings'), 800);
+    try {
+      setApiError(null);
+      const res = await fetch('http://localhost:5000/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(booking),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || 'Booking failed');
+      }
+      setShowModal(false);
+      setTimeout(() => navigate('/my-bookings'), 800);
+    } catch (err) {
+      setApiError(err.message);
+    }
   };
 
   return (
@@ -86,6 +97,7 @@ export default function ReviewPayment() {
           <div className="bg-white rounded-xl w-[95vw] max-w-md shadow-lg p-6 relative">
             <button onClick={() => { setShowModal(false); navigate(-1); }} className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl">×</button>
             <h2 className="review-title">Review Your Booking</h2>
+            {apiError && <div className="text-red-600 mb-2">{apiError}</div>}
             <div className="review-details">
               <div className="detail-item">
                 <span className="label">Adventure:</span>
