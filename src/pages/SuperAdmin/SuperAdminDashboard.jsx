@@ -38,7 +38,7 @@ import {
   getTotalCertificationAmount,
   getTotalAmount,
   getAllCertifications
-} from '../../Data/admin-data';
+} from '../../data/mock/admin-data';
 
 const sidebarItems = [
   { label: 'Overview', icon: <FaTachometerAlt /> },

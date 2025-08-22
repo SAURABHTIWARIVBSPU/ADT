@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllUsers } from '../../Data/admin-data';
+import { getAllUsers } from '../../data/mock/admin-data';
 
 export default function UsersSection() {
   const [users, setUsers] = useState([]);

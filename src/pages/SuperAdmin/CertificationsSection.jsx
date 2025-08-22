@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllCertifications } from '../../Data/admin-data';
+import { getAllCertifications } from '../../data/mock/admin-data';
 
 export default function CertificationsSection() {
   const [certifications, setCertifications] = useState([]);

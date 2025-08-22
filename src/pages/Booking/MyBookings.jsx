@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../../styles/components/MyBookings.css';
-import { globalAdventureData } from '../../Data/data';
+import { globalAdventureData } from '../../data/mock/data';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 

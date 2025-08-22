@@ -4,7 +4,7 @@ import Chatbot from './components/common/Chatbot';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
-import './App.css';
+import './styles/app.css';
 
 // ErrorBoundary to catch component errors
 class ErrorBoundary extends React.Component {

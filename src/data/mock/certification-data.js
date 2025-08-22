@@ -7,7 +7,7 @@ export const certifications = [
     requirements: 'Basic paragliding experience, age 18+',
     price: 350,
     duration: '5 days',
-    image: '../images/r22.webp',
+    image: '/images/r22.webp',
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const certifications = [
     requirements: 'Swimming skills, age 18+',
     price: 250,
     duration: '3 days',
-    image: '../images/logo.png',
+    image: '/images/logo.png',
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ export const certifications = [
     requirements: 'Trekking experience, age 18+',
     price: 400,
     duration: '7 days',
-    image: '../images/W2.jpg',
+    image: '/images/W2.jpg',
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ export const certifications = [
     requirements: 'Advanced diver certification, 100+ logged dives',
     price: 1200,
     duration: '2 weeks',
-    image: '../images/scuba.jpg',
+    image: '/images/scuba.jpg',
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ export const certifications = [
     requirements: 'Intermediate climbing skills, age 21+',
     price: 450,
     duration: '6 days',
-    image: '../images/climbing.jpg',
+    image: '/images/climbing.jpg',
   },
   {
     id: 6,
@@ -57,7 +57,7 @@ export const certifications = [
     requirements: '200+ jumps, USPA license',
     price: 800,
     duration: '10 days',
-    image: '../images/skydive.jpg',
+    image: '/images/skydive.jpg',
   },
   {
     id: 7,
@@ -67,7 +67,7 @@ export const certifications = [
     requirements: 'Basic first aid knowledge',
     price: 600,
     duration: '9 days',
-    image: '../images/medical.jpg',
+    image: '/images/medical.jpg',
   },
   {
     id: 8,
@@ -77,7 +77,7 @@ export const certifications = [
     requirements: 'Caving experience, no claustrophobia',
     price: 550,
     duration: '8 days',
-    image: '../images/caving.jpg',
+    image: '/images/caving.jpg',
   },
   {
     id: 9,
@@ -87,7 +87,7 @@ export const certifications = [
     requirements: '3+ years kitesurfing experience',
     price: 700,
     duration: '5 days',
-    image: '../images/kitesurf.jpg',
+    image: '/images/kitesurf.jpg',
   },
   {
     id: 10,
@@ -97,7 +97,7 @@ export const certifications = [
     requirements: 'Extensive biking experience',
     price: 380,
     duration: '4 days',
-    image: '../images/mtb.jpg',
+    image: '/images/mtb.jpg',
   },
   {
     id: 11,
@@ -107,7 +107,7 @@ export const certifications = [
     requirements: '20+ flight hours, medical exam',
     price: 2500,
     duration: '3 weeks',
-    image: '../images/red12.webp',
+    image: '/images/red12.webp',
   },
   {
     id: 12,
@@ -117,7 +117,7 @@ export const certifications = [
     requirements: '5+ years surfing experience',
     price: 420,
     duration: '5 days',
-    image: '../images/c2.webp',
+    image: '/images/c2.webp',
   },
   {
     id: 13,
@@ -127,7 +127,7 @@ export const certifications = [
     requirements: 'Backcountry skiing/snowboarding experience',
     price: 650,
     duration: '6 days',
-    image: '../images/c1.webp',
+    image: '/images/c1.webp',
   },
   {
     id: 14,
@@ -137,7 +137,7 @@ export const certifications = [
     requirements: '100+ flights, age 21+',
     price: 900,
     duration: '7 days',
-    image: '../images/a12.webp',
+    image: '/images/a12.webp',
   },
   {
     id: 15,
@@ -147,6 +147,6 @@ export const certifications = [
     requirements: 'Advanced kayaking skills',
     price: 580,
     duration: '5 days',
-    image: '../images/a11.webp',
+    image: '/images/a11.webp',
   }
 ];

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useParams } from 'react-router-dom';
-import { certifications } from '../../Data/certification-data';
+import { certifications } from '../../data/mock/certification-data';
 import CertificationDetail from '../Certification/CertificationDetail';
 import CertificationForm from '../Certification/CertificationForm';
 import Header from '../../components/layout/Header';

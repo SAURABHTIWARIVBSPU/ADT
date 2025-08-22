@@ -1,7 +1,7 @@
 // src/pages/Certification/CertificationGrid.jsx
 import React, { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { certifications } from '../../Data/certification-data';
+import { certifications } from '../../data/mock/certification-data';
 import CertificationCard from '../Certification/CertificationCard';
 import '../../styles/components/CertificationGrid.css';
 import CertificationSearchBar from '../Certification/CertificationSearchBar';
